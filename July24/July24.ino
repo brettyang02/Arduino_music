@@ -1,9 +1,10 @@
 #include <Keypad.h>
 #include <Servo.h>
 
-// Constants for HC-SR04 pins
+// Constants for pins
 const int trigPin = 12;
 const int echoPin = 13;
+const int servoPin = 10;
 
 // Define the keypad layout
 const byte ROWS = 4; //four rows
@@ -26,7 +27,6 @@ long duration;
 int distanceCm;
 unsigned long delayBuffer = 0;
 unsigned long delayTime = 1000; // Default delay of 1000ms (1 second)
-unsigned long previousMillis = 0;
 int mode = 1; // [1, 2, 3, 4] for [A, B, C, D]
 bool run = true;
 int pos = 0;
@@ -39,8 +39,8 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
-  // Connect the Servo motor to pin10
-  myservo.attach(10);
+  // Connect the Servo motor
+  myservo.attach(servoPin);
 }
 
 void loop() {
@@ -60,9 +60,7 @@ void loop() {
   else if (key == 'C') {mode = 3;}
   else if (key == 'D') {mode = 4;}
 
-  // Perform distance measurement when the required delay has passed
-  unsigned long currentMillis = millis();
-  if ((currentMillis - previousMillis >= delayTime) && run) {
+  if (run) {
     // Clear the trigPin to ensure a clean pulse
     digitalWrite(trigPin, LOW);
     delayMicroseconds(2);
@@ -87,7 +85,6 @@ void loop() {
     Serial.print("cm, mode=");
     Serial.println(mode);
 
-    // Reset the timer for the next measurement
-    previousMillis = currentMillis;
+    delay(10);
   } 
 }
