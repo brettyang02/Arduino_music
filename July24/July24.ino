@@ -1,8 +1,9 @@
 #include <Keypad.h>
+#include <Servo.h>
 
 // Constants for HC-SR04 pins
-const int trigPin = 2;
-const int echoPin = 3;
+const int trigPin = 12;
+const int echoPin = 13;
 
 // Define the keypad layout
 const byte ROWS = 4; //four rows
@@ -13,9 +14,12 @@ char keys[ROWS][COLS] = {
   {'7','8','9','C'},
   {'*','0','#','D'}
 };
-byte rowPins[ROWS] = {4, 5, 6, 7}; //connect to the row pinouts of the keypad
-byte colPins[COLS] = {8, 9, 10, 11}; //connect to the column pinouts of the keypad
+byte rowPins[ROWS] = {2, 3, 4, 5}; //connect to the row pinouts of the keypad
+byte colPins[COLS] = {6, 7, 8, 9}; //connect to the column pinouts of the keypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+
+//Define the servo motor input
+Servo myservo;
 
 // Variables
 long duration;
@@ -25,6 +29,7 @@ unsigned long delayTime = 1000; // Default delay of 1000ms (1 second)
 unsigned long previousMillis = 0;
 int mode = 1; // [1, 2, 3, 4] for [A, B, C, D]
 bool run = true;
+int pos = 0;
 
 void setup() {
   // Initialize serial communication
@@ -33,6 +38,9 @@ void setup() {
   // Set trigPin as OUTPUT and echoPin as INPUT
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+
+  // Connect the Servo motor to pin10
+  myservo.attach(10);
 }
 
 void loop() {
