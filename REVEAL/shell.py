@@ -30,5 +30,5 @@ while True:
     if (time_new - time_old) > delay:
         if (current):
             current.terminate()
-        current = subprocess.Popen(["python", "July25_Brett/play.py", str(note), str(mode), str(distance)])
+        current = subprocess.Popen(["python", "REVEAL/play.py", str(note), str(mode), str(distance)])
         time_old = time_new
