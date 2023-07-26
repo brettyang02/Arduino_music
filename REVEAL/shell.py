@@ -19,6 +19,15 @@ while True:
     numbers = re.findall(pattern, data)
     [delay, distance, mode] = [int(num) for num in numbers]
 
+    if (delay >= 2000):
+        delay = 2000 # 30bpm
+    elif (1500 <= delay < 2000):
+        delay = 1500 # 40bpm
+    elif (1000 <= delay < 1500):
+        delay = 1000 # 60bpm
+    else:
+        delay = 500 # 120bpm
+
     # turn distance to a note
     note = distance // 10
     if note > 7:

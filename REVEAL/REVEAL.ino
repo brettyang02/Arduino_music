@@ -26,7 +26,7 @@ Servo myservo;
 long duration;
 int distanceCm;
 unsigned long delayBuffer = 0;
-unsigned long delayTime = 1000; // Default delay of 1000ms (1 second)
+unsigned long delayTime = 2000; // Default delay of 1000ms (1 second)
 int mode = 1; // [1, 2, 3, 4] for [A, B, C, D]
 bool run = true;
 int pos = 0;
