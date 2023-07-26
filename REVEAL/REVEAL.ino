@@ -25,10 +25,10 @@ Servo myservo;
 // Variables
 long duration;
 int distanceCm;
-unsigned long delayBuffer = 0;
-unsigned long delayTime = 2000; // Default delay of 1000ms (1 second)
+int delayInput = 0;
+int delayTime = 2000;
 int mode = 1; // [1, 2, 3, 4] for [A, B, C, D]
-bool run = true;
+bool run = false;
 int pos = 0;
 
 void setup() {
@@ -48,11 +48,11 @@ void loop() {
   // Convert keypad input (ends with '#') t0 number
   char key = keypad.getKey();
   if (key >= '0' && key <= '9') {
-    delayBuffer = delayBuffer * 10 + (key - '0');
+    delayInput = delayInput * 10 + (key - '0');
   }
   else if (key == '#'){
-    delayTime = delayBuffer;
-    delayBuffer = 0;
+    delayTime = delayInput;
+    delayInput = 0;
   }
   else if (key == '*') {run = !run;}
   else if (key == 'A') {mode = 1;}
@@ -78,7 +78,7 @@ void loop() {
     // Divide by 2 to account for the time taken to reach the object and return to the sensor.
     distanceCm = duration * 0.0343 / 2;
 
-    // Send {delay, distance} to the Serial Monitor
+    // Send {tempo, distance, mode} to the Serial Monitor
     Serial.print(delayTime);
     Serial.print("ms, ");
     Serial.print(distanceCm);

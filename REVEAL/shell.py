@@ -6,12 +6,15 @@ import subprocess
 ser = serial.Serial('COM3', 9600)
 
 delay = 0; distance = 0; mode = 0
+tempo = 0
 note = 0
 time_old = 0
 current = None
 
 
 while True:
+    # read datq from serial port
+    # if run=0, will just wait until data is available
     data = ser.readline().decode().strip()
 
     # find the three integers in the string
@@ -20,13 +23,13 @@ while True:
     [delay, distance, mode] = [int(num) for num in numbers]
 
     if (delay >= 2000):
-        delay = 2000 # 30bpm
+        tempo = 30
     elif (1500 <= delay < 2000):
-        delay = 1500 # 40bpm
+        tempo = 40
     elif (1000 <= delay < 1500):
-        delay = 1000 # 60bpm
+        tempo = 60
     else:
-        delay = 500 # 120bpm
+        tempo = 120
 
     # turn distance to a note
     note = distance // 10
@@ -39,5 +42,5 @@ while True:
     if (time_new - time_old) > delay:
         if (current):
             current.terminate()
-        current = subprocess.Popen(["python", "REVEAL/play.py", str(note), str(mode), str(distance)])
+        current = subprocess.Popen(["python", "REVEAL/play.py", str(note), str(mode), str(tempo), str(distance)])
         time_old = time_new
