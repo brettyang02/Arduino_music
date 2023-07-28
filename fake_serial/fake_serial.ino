@@ -1,4 +1,4 @@
-int delayTime = 1000;
+int tempo = 60;
 int distanceCm = 15;
 int mode = 1;
 
@@ -27,8 +27,8 @@ void loop() {
 
 
   // Send {delay, distance} to the Serial Monitor
-  Serial.print(delayTime);
-  Serial.print("ms, ");
+  Serial.print(tempo);
+  Serial.print("bpm, ");
   Serial.print(distanceCm);
   Serial.print("cm, mode=");
   Serial.println(mode);

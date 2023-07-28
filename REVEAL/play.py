@@ -16,9 +16,9 @@ else:
     print("PLAYING: ", notes[note], " ("+distance+"cm)", "\t", "mode = ", mode)
 
     os.chdir("./REVEAL/audio/")
-    bass_filename = notes[note]+"_"+mode+".mp3"
-    drum_filename = "drum_"+mode+".mp3"
-    audio_files = [bass_filename, drum_filename]  # Replace with your actual file paths
+    bass_filename = notes[note]+"_"+tempo+"bpm_"+mode+".mp3"
+    drum_filename = "drum_"+tempo+"bpm_"+mode+".mp3"
+    audio_files = [bass_filename, drum_filename]
 
     pygame.mixer.init()
     num_channels = pygame.mixer.get_num_channels()

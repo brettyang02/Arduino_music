@@ -3,7 +3,7 @@ import re
 import time
 import subprocess
 
-ser = serial.Serial('COM3', 9600)
+ser = serial.Serial('COM4', 9600)
 
 delay = 0; distance = 0; mode = 0
 tempo = 0
@@ -11,6 +11,12 @@ note = 0
 time_old = 0
 current = None
 
+delay_dic = {
+    # mode =  4/4， 4/4,  3/4,  12/8
+    120: [-1, 2000, 2000, 1500, 3000],
+    90:  [-1, 2667, 2667, 2000, 4000],
+    60:  [-1, 4000, 4000, 3000, 6000]
+}
 
 while True:
     # read datq from serial port
@@ -20,16 +26,16 @@ while True:
     # find the three integers in the string
     pattern = r'\d+'
     numbers = re.findall(pattern, data)
-    [delay, distance, mode] = [int(num) for num in numbers]
+    [tempo, distance, mode] = [int(num) for num in numbers]
 
-    if (delay >= 2000):
-        tempo = 30
-    elif (1500 <= delay < 2000):
-        tempo = 40
-    elif (1000 <= delay < 1500):
-        tempo = 60
-    else:
+    if (tempo >= 120):
         tempo = 120
+    elif (90 <= tempo < 120):
+        tempo = 90
+    else:
+        tempo = 60
+
+    delay = delay_dic[tempo][mode]
 
     # turn distance to a note
     note = distance // 10
