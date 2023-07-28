@@ -2,8 +2,12 @@ import serial
 import re
 import time
 import subprocess
+import os
 
-ser = serial.Serial('COM4', 9600)
+if not os.getcwd().endswith("REVEAL"):
+    os.chdir("./REVEAL")
+
+ser = serial.Serial('COM3', 9600)
 
 delay = 0; distance = 0; mode = 0
 tempo = 0
@@ -48,5 +52,5 @@ while True:
     if (time_new - time_old) > delay:
         if (current):
             current.terminate()
-        current = subprocess.Popen(["python", "REVEAL/play.py", str(note), str(mode), str(tempo), str(distance)])
+        current = subprocess.Popen(["python", "play.py", str(note), str(mode), str(tempo), str(distance)])
         time_old = time_new

@@ -3,6 +3,9 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import sys
 
+if not os.getcwd().endswith("REVEAL"):
+    os.chdir("./REVEAL")
+
 [note, mode, tempo, distance] = sys.argv[1:]
 note = int(note)
 notes = ['?', 'C', 'D', 'E', 'F', 'G', 'A', 'B', '?']
@@ -15,7 +18,7 @@ if notes[note] == '?':
 else:
     print("PLAYING: ", notes[note], " ("+distance+"cm)", "\t", "mode = ", mode)
 
-    os.chdir("./REVEAL/audio/")
+    os.chdir("./audio/")
     bass_filename = notes[note]+"_"+tempo+"bpm_"+mode+".mp3"
     drum_filename = "drum_"+tempo+"bpm_"+mode+".mp3"
     audio_files = [bass_filename, drum_filename]
