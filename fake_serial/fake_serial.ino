@@ -22,7 +22,7 @@ void loop() {
   if (i == dummy) {
     i = 0;
     distanceCm += 10;
-    if (distanceCm >= 30) distanceCm = 15;
+    if (distanceCm >= 80) distanceCm = 15;
   }
 
 
