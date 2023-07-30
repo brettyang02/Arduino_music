@@ -20,6 +20,9 @@ else:
 
     os.chdir("./audio/")
     bass_filename = notes[note]+"_"+tempo+"bpm_"+mode+".mp3"
+    if (mode == '1'):
+        # no bpm difference when mode = 1
+        bass_filename = notes[note]+"_all_1.mp3"
     drum_filename = "drum_"+tempo+"bpm_"+mode+".mp3"
     audio_files = [bass_filename, drum_filename]
 
