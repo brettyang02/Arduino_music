@@ -33,15 +33,16 @@ The Python note player is responsible for creating musical notes and drum sounds
 
 ## How to use:
 Setup and Execution:
-Connect the Arduino to the hardware components (keypad, ultrasonic sensor, and servo motor) as described in the connections section of the Arduino code.
-Connect the Arduino board to the computer via a USB cable.
-Upload the Arduino code to the Arduino board using the Arduino IDE
-Close Arduino and install the required Python libraries (serial, pygame) for the Python Outer Shell and Python Note Player using pip.
-Run the Python Outer Shell (Python_Outer_Shell.py) on the computer. Ensure the correct serial port (e.g., 'COM3') is specified in the ser = serial.Serial('COM3', 9600) line.
-The Arduino will start reading input from the keypad and sending data to the Python Outer Shell.
-The Python Outer Shell will process the data and trigger the Python Note Player to play notes and drum sounds based on the received data.
+1. Connect the Arduino to the hardware components (keypad, ultrasonic sensor, and servo motor) as described in the connections section of the Arduino code.
+2. Connect the Arduino board to the computer via a USB cable.
+3. Upload the Arduino code to the Arduino board using the Arduino IDE
+4. Close Arduino and install the required Python libraries (serial, pygame) for the Python Outer Shell and Python Note Player using pip.
+5. Run the Python Outer Shell (Python_Outer_Shell.py) on the computer. Ensure the correct serial port (e.g., 'COM3') is specified in the ser = serial.Serial('COM3', 9600) line.
+6. The Arduino will start reading input from the keypad and sending data to the Python Outer Shell.
+7. The Python Outer Shell will process the data and trigger the Python Note Player to play notes and drum sounds based on the received data.
 
 Important Notes:
-Ensure all hardware components are properly connected to the Arduino before uploading the code.
-Adjust the speed and mode settings as needed for your musical preferences.
-The provided code is a basic example and may require further modifications or enhancements for specific use cases.
+- Ensure all hardware components are properly connected to the Arduino before uploading the code.
+- Serial port information can be found through Arduino IDE or Device Manager 
+- Adjust the speed and mode settings as needed for your musical preferences.
+- The provided code is a basic example and may require further modifications or enhancements for specific use cases.
