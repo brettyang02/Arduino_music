@@ -1,10 +1,8 @@
 #include <Keypad.h>
-#include <Servo.h>
 
 // Constants for pins
 const int trigPin = 12;
 const int echoPin = 13;
-const int servoPin = 10;
 
 // Define the keypad layout
 const byte ROWS = 4; //four rows
@@ -18,9 +16,6 @@ char keys[ROWS][COLS] = {
 byte rowPins[ROWS] = {2, 3, 4, 5}; //connect to the row pinouts of the keypad
 byte colPins[COLS] = {6, 7, 8, 9}; //connect to the column pinouts of the keypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
-
-//Define the servo motor input
-Servo myservo;
 
 // Variables
 long duration;
@@ -39,8 +34,6 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
-  // Connect the Servo motor
-  myservo.attach(servoPin);
 }
 
 void loop() {
